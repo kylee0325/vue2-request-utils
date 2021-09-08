@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 import { isNil } from "./index";
 import { State } from "../createQuery";
 import { UnWrapRefObject } from "./types";

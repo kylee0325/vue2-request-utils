@@ -1,17 +1,17 @@
-English | [简体中文](README-zh_CN.md)
+[English](./README.md) | 简体中文
 
 <h1 align="center">vue2-request-utils</h1>
 <div align="center">
-  <p align="center">⚡️ Vue 3 composition API for data fetching. This is a version for Vue 2 by using @vue/composition-api, which is forked from VueRequest.</p>
+  <p align="center">⚡️ 一个能轻松帮你管理请求状态的 Vue 3 composition API 请求库，这是从VueRequest移植过来调整的vue2版本，基于@vue/composition-api。</p>
 </div>
 
-## Documentation
+## 文档
 
 - [VueRequest](https://www.npmjs.com/package/vue-request)
 - [English](https://www.attojs.org/)
 - [中文](https://www.attojs.org/zh/)
 
-## Install
+## 安装
 
 ```bash
 npm install vue2-request-utils
@@ -20,7 +20,7 @@ npm install vue2-request-utils
 yarn add vue2-request-utils
 ```
 
-## Usage
+## 用例
 
 ```tsx
 import { useRequest } from "vue2-request-utils";

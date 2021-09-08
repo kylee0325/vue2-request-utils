@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 import { isDocumentVisibility, isServer } from "./index";
 
 type EventFunc = () => void;

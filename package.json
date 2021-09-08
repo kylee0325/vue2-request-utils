@@ -6,7 +6,7 @@
   "module": "lib/index.esm.js",
   "scripts": {
     "dev": "yarn vite ./example",
-    "clean": "rimraf dist/*",
+    "clean": "rimraf lib/*",
     "build": "yarn clean && rollup --config ./rollup.config.js",
     "vite": "vite --config ./vite.config.js"
   },

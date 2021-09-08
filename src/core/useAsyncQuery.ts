@@ -81,6 +81,7 @@ function useAsyncQuery<R, P extends unknown[], FR>(
     errorRetryCount = 0,
     errorRetryInterval = 0,
     queryKey,
+    // @ts-ignore
     formatResult,
     onSuccess,
     onError,

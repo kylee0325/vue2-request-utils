@@ -49,6 +49,7 @@ const setStateBind = <R, P extends unknown[], T extends State<R, P>>(
 ) => {
   return (newState: Partial<UnWrapRefObject<State<R, P>>>) => {
     Object.keys(newState).forEach((key) => {
+      // @ts-ignore
       oldState[key].value = newState[key];
     });
     publicCb.forEach((fun) => fun(oldState));
@@ -129,7 +130,7 @@ const createQuery = <R, P extends unknown[]>(
     let timerId: number;
 
     if (loadingDelay) {
-      timerId = setTimeout(setState, loadingDelay, {
+      timerId = window.setTimeout(setState, loadingDelay, {
         loading: true,
       });
     }
@@ -147,7 +148,7 @@ const createQuery = <R, P extends unknown[]>(
         (pollingWhenHidden || isDocumentVisibility()) &&
         (pollingWhenOffline || isOnline())
       ) {
-        timerId = setTimeout(pollingFunc, pollingInterval);
+        timerId = window.setTimeout(pollingFunc, pollingInterval);
       } else {
         // stop polling
         stopPollingWhenHiddenOrOffline.value = true;
@@ -180,7 +181,7 @@ const createQuery = <R, P extends unknown[]>(
     // if errorRetryCount is -1, it will retry the request until it success
     if (error.value && (isInfiniteRetry || hasRetryCount)) {
       if (!isInfiniteRetry) retriedCount.value += 1;
-      timerId = setTimeout(retryFunc, actualErrorRetryInterval.value);
+      timerId = window.setTimeout(retryFunc, actualErrorRetryInterval.value);
     }
     return () => timerId && clearTimeout(timerId);
   };

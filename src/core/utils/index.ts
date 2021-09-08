@@ -30,8 +30,8 @@ export const isOnline = () => !isServer && window.navigator.onLine;
 
 export const unRefObject = <T extends RefObject>(val: T) => {
   const obj = {};
-
   Object.keys(val).forEach((key) => {
+    // @ts-ignore
     obj[key] = unref(val[key]);
   });
 
