@@ -1,5 +1,4 @@
-import debounce from "lodash/debounce";
-import throttle from "lodash/throttle";
+import { debounce, throttle } from "lodash";
 import { computed, Ref, ref } from "@vue/composition-api";
 import { Config } from "./config";
 import { Queries } from "./useAsyncQuery";

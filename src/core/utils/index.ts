@@ -1,17 +1,17 @@
 /* eslint-disable no-restricted-globals */
-import { unref } from "@vue/composition-api";
-import { RefObject, UnRef } from "./types";
+import { unref } from '@vue/composition-api';
+import { RefObject, UnRef } from './types';
 
 export const objectToString = Object.prototype.toString;
 export const toTypeString = (val: unknown): string => objectToString.call(val);
 
 export const isString = (val: unknown): val is string =>
-  toTypeString(val) === "[object String]";
+  toTypeString(val) === '[object String]';
 export const isPlainObject = (val: unknown): val is Record<string, any> =>
-  toTypeString(val) === "[object Object]";
+  toTypeString(val) === '[object Object]';
 
 export const isObject = (val: unknown): val is Record<any, any> =>
-  val !== null && typeof val === "object";
+  val !== null && typeof val === 'object';
 
 export const isPromise = (fn: unknown): fn is Promise<unknown> =>
   isObject(fn) && isFunction(fn.then) && isFunction(fn.catch);
@@ -21,16 +21,16 @@ export const isFunction = (fn: unknown): fn is Function =>
 
 export const isNil = (val: unknown) => val === null || val === undefined;
 
-export const isServer = typeof window === "undefined";
+export const isServer = typeof window === 'undefined';
 
 export const isDocumentVisibility = () =>
-  !isServer && window.document.visibilityState === "visible";
+  !isServer && window.document.visibilityState === 'visible';
 
 export const isOnline = () => !isServer && window.navigator.onLine;
 
 export const unRefObject = <T extends RefObject>(val: T) => {
   const obj = {};
-  Object.keys(val).forEach((key) => {
+  Object.keys(val).forEach(key => {
     // @ts-ignore
     obj[key] = unref(val[key]);
   });

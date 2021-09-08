@@ -1,6 +1,6 @@
-import { isNil } from "./index";
-import { State } from "../createQuery";
-import { UnWrapRefObject } from "./types";
+import { isNil } from './index';
+import { State } from '../createQuery';
+import { UnWrapRefObject } from './types';
 
 type CacheResultType<T> = {
   data: T;
@@ -17,10 +17,10 @@ export type CacheDataType<R, P extends unknown[]> = {
 };
 
 type GetCacheReturn<R, P extends unknown[]> =
-  | Omit<CacheResultType<CacheDataType<R, P>>, "timer">
+  | Omit<CacheResultType<CacheDataType<R, P>>, 'timer'>
   | undefined;
 export const getCache = <R, P extends unknown[]>(
-  cacheKey: CacheKey
+  cacheKey: CacheKey,
 ): GetCacheReturn<R, P> => {
   if (isNil(cacheKey)) return;
   const data = CACHE_MAP.get(cacheKey);
@@ -34,7 +34,7 @@ export const getCache = <R, P extends unknown[]>(
 export const setCache = <R, P extends unknown[]>(
   cacheKey: CacheKey,
   data: CacheDataType<R, P>,
-  cacheTime: number
+  cacheTime: number,
 ) => {
   const oldCache = CACHE_MAP.get(cacheKey);
   if (oldCache && oldCache.timer) {
@@ -55,7 +55,7 @@ export const clearCache = (cacheKey?: CacheKey) => {
     CACHE_MAP.delete(cacheKey);
   } else {
     // clear timer
-    CACHE_MAP.forEach((i) => clearTimeout(i.timer));
+    CACHE_MAP.forEach(i => clearTimeout(i.timer));
     CACHE_MAP.clear();
   }
 };

@@ -6,7 +6,7 @@ import {
   ref,
   watch,
   watchEffect,
-} from "@vue/composition-api";
+} from '@vue/composition-api';
 import {
   BaseOptions,
   Config,
@@ -15,7 +15,7 @@ import {
   GlobalOptions,
   GLOBAL_OPTIONS_PROVIDE_KEY,
   MixinOptions,
-} from "./config";
+} from './config';
 import createQuery, {
   InnerQueryState,
   InnerRunReturn,
@@ -23,13 +23,13 @@ import createQuery, {
   Query,
   QueryState,
   State,
-} from "./createQuery";
-import { resolvedPromise, unRefObject } from "./utils";
-import { getCache, setCache } from "./utils/cache";
-import { UnWrapRefObject } from "./utils/types";
+} from './createQuery';
+import { resolvedPromise, unRefObject } from './utils';
+import { getCache, setCache } from './utils/cache';
+import { UnWrapRefObject } from './utils/types';
 
 export interface BaseResult<R, P extends unknown[]>
-  extends Omit<QueryState<R, P>, "run"> {
+  extends Omit<QueryState<R, P>, 'run'> {
   run: (...arg: P) => InnerRunReturn<R>;
   reset: () => void;
 }
@@ -42,23 +42,23 @@ export type Queries<R, P extends unknown[]> = {
   [key: string]: UnWrapState<R, P>;
 };
 
-const QUERY_DEFAULT_KEY = "__QUERY_DEFAULT_KEY__";
+const QUERY_DEFAULT_KEY = '__QUERY_DEFAULT_KEY__';
 
 function useAsyncQuery<R, P extends unknown[], FR>(
   query: Query<R, P>,
-  options: FormatOptions<R, P, FR>
+  options: FormatOptions<R, P, FR>,
 ): BaseResult<FR, P>;
 function useAsyncQuery<R, P extends unknown[]>(
   query: Query<R, P>,
-  options: BaseOptions<R, P>
+  options: BaseOptions<R, P>,
 ): BaseResult<R, P>;
 function useAsyncQuery<R, P extends unknown[], FR>(
   query: Query<R, P>,
-  options: MixinOptions<R, P, FR>
+  options: MixinOptions<R, P, FR>,
 ) {
   const injectedGlobalOptions = inject<GlobalOptions>(
     GLOBAL_OPTIONS_PROVIDE_KEY,
-    {}
+    {},
   );
 
   const {
@@ -113,7 +113,7 @@ function useAsyncQuery<R, P extends unknown[], FR>(
         },
         latestQueriesKey: currentQueryKey,
       },
-      cacheTime
+      cacheTime,
     );
   };
 
@@ -161,8 +161,8 @@ function useAsyncQuery<R, P extends unknown[], FR>(
       params.value = latestQuery.value.params;
     },
     {
-      flush: "pre",
-    }
+      flush: 'pre',
+    },
   );
 
   // init queries from cache
@@ -170,7 +170,7 @@ function useAsyncQuery<R, P extends unknown[], FR>(
     const cache = getCache<R, P>(cacheKey);
 
     if (cache && cache.data && cache.data.queries) {
-      Object.keys(cache.data.queries).forEach((key) => {
+      Object.keys(cache.data.queries).forEach(key => {
         const cacheQuery = cache.data.queries![key];
 
         queries[key] = <UnWrapState<R, P>>reactive(
@@ -179,7 +179,7 @@ function useAsyncQuery<R, P extends unknown[], FR>(
             params: cacheQuery.params,
             data: cacheQuery.data,
             error: cacheQuery.error,
-          })
+          }),
         );
       });
       /* istanbul ignore else */
@@ -218,7 +218,7 @@ function useAsyncQuery<R, P extends unknown[], FR>(
 
   // unmount queries
   const unmountQueries = () => {
-    Object.keys(queries).forEach((key) => {
+    Object.keys(queries).forEach(key => {
       queries[key].cancel();
       queries[key].unmount();
       delete queries[key];
@@ -245,7 +245,7 @@ function useAsyncQuery<R, P extends unknown[], FR>(
 
     if (!isFresh) {
       if (hasCacheQueries) {
-        Object.keys(queries).forEach((key) => {
+        Object.keys(queries).forEach(key => {
           queries[key] && queries[key].refresh();
         });
       } else {
@@ -260,7 +260,7 @@ function useAsyncQuery<R, P extends unknown[], FR>(
   const stopReady = ref();
   stopReady.value = watch(
     ready,
-    (val) => {
+    val => {
       hasTriggerReady.value = true;
       if (val && tempReadyParams.value) {
         run(...tempReadyParams.value);
@@ -269,8 +269,8 @@ function useAsyncQuery<R, P extends unknown[], FR>(
       }
     },
     {
-      flush: "sync",
-    }
+      flush: 'sync',
+    },
   );
 
   // watch refreshDeps

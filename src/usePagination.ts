@@ -8,8 +8,7 @@ import {
   GLOBAL_OPTIONS_PROVIDE_KEY,
 } from "./core/config";
 import useAsyncQuery, { BaseResult } from "./core/useAsyncQuery";
-import merge from "lodash/merge";
-import get from "lodash/get";
+import { merge, get } from "lodash";
 import generateService from "./core/utils/generateService";
 import { IService } from "./core/utils/types";
 

@@ -8,11 +8,10 @@ import {
   GLOBAL_OPTIONS_PROVIDE_KEY,
 } from "./core/config";
 import useAsyncQuery, { BaseResult } from "./core/useAsyncQuery";
-import get from "lodash/get";
+import { get, omit } from "lodash";
 import generateService from "./core/utils/generateService";
 import { isFunction } from "./core/utils";
 import { ServiceParams } from "./core/utils/types";
-import omit from "lodash/omit";
 
 export interface LoadMoreResult<R, P extends unknown[], LR extends unknown[]>
   extends Omit<BaseResult<R, P>, "queries" | "refresh" | "mutate"> {
